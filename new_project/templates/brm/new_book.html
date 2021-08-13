@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>     New Book Record</title>
+    <link rel="stylesheet" href="{% static 'css/view.css '%}">
+  </head>
+  <body>
+
+    <style media="screen">
+
+
+        #header::before
+        {
+          content:"";
+          position: absolute;
+          background:url('{% static "media/view_image2.jpg" %}') no-repeat center center/cover;
+          height:30%;
+      width:100%;
+          z-index: -1;
+          opacity: 0.8;
+        left:0;top:0; }
+            </style>
+
+
+
+
+
+
+  <div id="header">
+    <div id="d1">
+          <h1> Book Record Management</h1>
+    </div>
+          <p  >Hello, {{request.session.username}}</p>
+
+      <div id="nav">
+
+        <a href="http://localhost:2000/brm/view-books">View Books </a>
+                <a href="http://localhost:2000/brm/new-book">Add New Book </a>
+                        <a href="http://localhost:2000/brm/search-book">Search Book </a>
+                        <a href="http://localhost:2000/brm/logout/">Logout</a>
+                                  </div>
+    </div>
+
+
+
+
+<div id="main">
+  <h2>Add New Book Record</h2>
+  <form action="http://localhost:2000/brm/add/" method="post"  >
+{% csrf_token %}
+    {{form }}
+
+    <input type="submit" value="save">
+
+    </form>
+</div>
+
+
+
+
+  </body>
+</html>

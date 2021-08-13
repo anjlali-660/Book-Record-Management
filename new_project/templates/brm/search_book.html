@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>     Search Book Record</title>
+    <link rel="stylesheet" href="{% static 'css/view.css'%}">
+  </head>
+  <body>
+<style media="screen">
+
+
+    #header::before
+    {
+      content:"";
+      position: absolute;
+      background:url('{% static "media/view_image2.jpg" %}') no-repeat center center/cover;
+      height:30%;
+  width:100%;
+      z-index: -1;
+      opacity: 0.8;
+      top:0;
+    right:0;
+  left:0 }
+        </style>
+
+
+
+  <div id="header">
+    <div id="d1">
+          <h1> Book Record Management</h1>
+    </div>
+          <p  >Hello, {{request.session.username}}</p>
+
+      <div id="nav">
+
+        <a href="http://localhost:2000/brm/view-books">View Books </a>
+                <a href="http://localhost:2000/brm/new-book">Add New Book </a>
+                        <a href="http://localhost:2000/brm/search-book">Search Book </a>
+                                  <a href="http://localhost:2000/brm/logout/">Logout</a>
+                                  </div>
+    </div>
+
+
+
+
+
+
+<div id="main">
+  <br><br>
+  <h2 style="position:relative;bottom:50px;">Search Book Record</h2>
+  <form action="http://localhost:2000/brm/search/" method="post">
+{% csrf_token %}
+    {{form}}
+
+    <input type="submit" value="search">
+  </form>
+{% if books %}
+<table>
+  <tr>
+    <th>Book Title</th>
+    <th>Author</th>
+    <th>Price</th>
+    <th>Publisher</th>
+    <th></th>
+    <th></th>
+  </tr>
+{% for book in books %}
+  <tr>
+    <td>{{book.title}}</td>
+    <td>{{book.author}}</td>
+    <td>{{book.price}}</td>
+    <td>{{book.publisher}}</td>
+    <<td><a href="http://localhost:2000/brm/edit-book?bookid={{book.id}}">Edit </a></td>
+           <td><a href="http://localhost:2000/brm/delete-book?bookid={{book.id}}">delete </a></td>
+  </tr>
+
+  {% endfor %}
+</table>
+
+{% endif %}
+
+{% if not books %}
+<p style="font-size:20px;font-weight:bolder;font-family:cursive;">No Record Found!!</p>
+{% endif %}
+</div>
+
+
+
+
+
+
+  </body>
+</html>
